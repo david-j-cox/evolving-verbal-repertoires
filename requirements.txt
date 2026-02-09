@@ -1,0 +1,4 @@
+# evolving-verbal-repertoires
+# Add project dependencies below, e.g.:
+# numpy>=1.24.0
+# pandas>=2.0.0
