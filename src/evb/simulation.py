@@ -71,8 +71,20 @@ def _fast_word_similarity(
     return sims[active].sum() / n
 
 
-def run_simulation(config: SimulationConfig) -> tuple[SimulationLog, Learner, Lexicon]:
-    """Run the full simulation and return logs + trained learner."""
+def run_simulation(
+    config: SimulationConfig,
+    progress_callback: callable | None = None,
+) -> tuple[SimulationLog, Learner, Lexicon]:
+    """Run the full simulation and return logs + trained learner.
+
+    Parameters
+    ----------
+    config : SimulationConfig
+        Full simulation configuration.
+    progress_callback : callable, optional
+        Called as ``progress_callback(step, n_steps)`` every *log_every* steps.
+        Useful for driving progress bars in UIs.
+    """
     rng = np.random.default_rng(config.seed)
 
     # Build components.
@@ -227,5 +239,8 @@ def run_simulation(config: SimulationConfig) -> tuple[SimulationLog, Learner, Le
             window_sim = [[] for _ in range(4)]
             window_rein = [[] for _ in range(4)]
             window_trial_counts = [0, 0, 0, 0]
+
+            if progress_callback is not None:
+                progress_callback(step, n_steps)
 
     return log, learner, lexicon

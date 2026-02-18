@@ -16,6 +16,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["jupyter", "ipykernel"]
+ui = ["streamlit>=1.30", "pandas>=2.0"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
